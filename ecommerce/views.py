@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 def ecommerce_index_view(request):
@@ -41,3 +42,10 @@ def contact_view(request, contact_id):
         "checkout_id": contact_id
        }
     return render(request, 'contact.html',context= context_data)
+
+def basic_request(request):
+    if request.metod == "GET":
+        return JsonResponse({"status":"GET Pass"}, safe=False)
+    if request.metod == "POST":
+        return JsonResponse({"status":"POST Pass"}, safe=False)
+    
